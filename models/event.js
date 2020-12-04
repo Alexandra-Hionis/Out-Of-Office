@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var Post = sequelize.define("Post", {
+    var Event = sequelize.define("Event", {
       eventName: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -26,6 +26,13 @@ module.exports = function(sequelize, DataTypes) {
         defaultValue: ""
       }
     });
-    return Post;
+    Event.associate = function(models) {
+        // Associating Event with Posts
+        // When an Event is deleted, also delete any associated Posts
+        Event.belongsToMany(models.User,{
+            through: "UserEvents"
+          });
+      };
+    return Event;
   };
   
