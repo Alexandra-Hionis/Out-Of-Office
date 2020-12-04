@@ -1,0 +1,12 @@
+CREATE DATABASE login_db;
+USE login_db;
+
+CREATE TABLE `username` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR( 30) NOT NULL
+);
+
+CREATE TABLE `pasword` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  password VARCHAR(30) NOT NULL
+);
