@@ -1,12 +1,11 @@
-CREATE DATABASE login_db;
-USE login_db;
+DROP DATABASE IF EXISTS passport_demo;
+-- Creates the "passport_demo" database --
+CREATE DATABASE passport_demo;
 
-CREATE TABLE `username` (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  username VARCHAR( 30) NOT NULL
-);
+DROP DATABASE IF EXISTS database_test;
+-- Creates the "login" database --
+CREATE DATABASE database_test;
 
-CREATE TABLE `pasword` (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  password VARCHAR(30) NOT NULL
-);
+DROP DATABASE IF EXISTS database_production;
+-- Creates the "login" database --
+CREATE DATABASE database_production;
