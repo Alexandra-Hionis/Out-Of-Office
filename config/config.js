@@ -1,22 +1,23 @@
+module.exports =
 {
   "development": {
     "username": "root",
-    "password": "Loukianosbrother10!",
+    "password": process.env.DB_PASSWORD,
     "database": "companyEvents_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password":  "Loukianosbrother10!",
-    "database": "database_test",
+    "password": process.env.DB_PASSWORD,
+    "database": "companyEvents_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password":  "Loukianosbrother10!",
-    "database": "database_production",
+    "password": process.env.DB_PASSWORD,
+    "database": "companyEvents_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
