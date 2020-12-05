@@ -35,4 +35,12 @@ module.exports = function (app) {
     res.sendFile(path.join(__dirname, "../public/members.html"));
   });
 
-};
+}
+
+// to the event feed
+app.get ("/event", isAuthenticated, function (req,res){
+  res.render("event-feed",) // need an object to pass through here after the comma
+});
+
+// eventually render handlebars files.
+
