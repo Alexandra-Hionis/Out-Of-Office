@@ -101,7 +101,7 @@ module.exports = function(sequelize, DataTypes) {
           locationInput.val(data.body);
           detailsInput.val(data.body);
           participantsInput.val(data.body);
-          authorId = data.AuthorId || data.id;
+          categoryId = data.CategoryId || data.id;
           // If we have a post with this id, set a flag for us to know to update the post
           // when we hit submit
           updating = true;
@@ -109,46 +109,46 @@ module.exports = function(sequelize, DataTypes) {
       });
     }
   
-    // // A function to get Authors and then render our list of Authors
-    // function getCategories() {
-    //   $.get("/api/categories", renderCategoryList);
-    // }
-    // // Function to either render a list of authors, or if there are none, direct the user to the page
-    // // to create an author first
-    // function renderCategoryList(data) {
-    //   if (!data.length) {
-    //     window.location.href = "/authors";
-    //   }
-    //   $(".hidden").removeClass("hidden");
-    //   var rowsToAdd = [];
-    //   for (var i = 0; i < data.length; i++) {
-    //     rowsToAdd.push(createAuthorRow(data[i]));
-    //   }
-    //   authorSelect.empty();
-    //   console.log(rowsToAdd);
-    //   console.log(authorSelect);
-    //   authorSelect.append(rowsToAdd);
-    //   authorSelect.val(authorId);
-    // }
+    // A function to get Authors and then render our list of Authors
+    function getCategories() {
+      $.get("/api/categories", renderCategoryList);
+    }
+    // Function to either render a list of authors, or if there are none, direct the user to the page
+    // to create an author first
+    function renderCategoryList(data) {
+      if (!data.length) {
+        window.location.href = "/categories";
+      }
+      $(".hidden").removeClass("hidden");
+      var rowsToAdd = [];
+      for (var i = 0; i < data.length; i++) {
+        rowsToAdd.push(createAuthorRow(data[i]));
+      }
+      categorySelect.empty();
+      console.log(rowsToAdd);
+      console.log(categorySelect);
+      categorySelect.append(rowsToAdd);
+      categorySelect.val(categoryId);
+    }
   
-    // // Creates the author options in the dropdown
-    // function createAuthorRow(author) {
-    //   var listOption = $("<option>");
-    //   listOption.attr("value", author.id);
-    //   listOption.text(author.name);
-    //   return listOption;
-    // }
+    // Creates the author options in the dropdown
+    function createAuthorRow(category) {
+      var listOption = $("<option>");
+      listOption.attr("value", category.id);
+      listOption.text(category.name);
+      return listOption;
+    }
   
-    // // Update a given post, bring user to the blog page when done
-    // function updatePost(post) {
-    //   $.ajax({
-    //     method: "PUT",
-    //     url: "/api/posts",
-    //     data: post
-    //   })
-    //     .then(function() {
-    //       window.location.href = "/blog";
-    //     });
-    // }
+    // Update a given post, bring user to the blog page when done
+    function updateEvent(post) {
+      $.ajax({
+        method: "PUT",
+        url: "/api/posts",
+        data: post
+      })
+        .then(function() {
+          window.location.href = "/blog";
+        });
+    }
   });
   
