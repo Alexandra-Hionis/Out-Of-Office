@@ -6,12 +6,20 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function (app) {
 
+// event feed
   app.get("/events", function (req, res) {
     db.Event.findAll({}).then(function (data) {
       console.log(data)
       res.render("event-feed", { events: data })
     })
   })
+
+  // create event html
+  app.get("/create-event.html", function (req,res) {
+    res.sendFile(path.join(__dirname,"../views/create-event.html"))
+  });
+
+
 
   app.get("/", function (req, res) {
     // If the user already has an account send them to the members page
@@ -38,9 +46,9 @@ module.exports = function (app) {
 }
 
 // to the event feed
-app.get ("/event", isAuthenticated, function (req,res){
+/* app.get ("/event", isAuthenticated, function (req,res){
   res.render("event-feed",) // need an object to pass through here after the comma
 });
 
-// eventually render handlebars files.
+// eventually render handlebars files. */
 
