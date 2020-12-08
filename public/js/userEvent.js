@@ -1,13 +1,9 @@
-module.exports = function(sequelize, DataTypes) {
-    var UserEvent = sequelize.define("UserEvent");
-    return UserEvent;
-  };
-  
+
   $(document).ready(function() {
     // Getting jQuery references to the event name, location, details, who's coming and form.
     var eventNameInput = $("#event-name");
     var locationInput = $("#location");
-    var detailsInput = $("details");
+    var detailsInput = $("#details");
     var participantsInput = $("#participants");
     var createEventForm = $("#createEvent");
     var categorySelect = $("#inputCategory");
@@ -17,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
     // Gets the part of the url that comes after the "?" (which we have if we're updating an event)
     var url = window.location.search;
     var eventId;
-    var categoryId;
+    var category_id;
     // Sets a flag for whether or not we're updating an event to be false initially
     var updating = false;
   
@@ -27,13 +23,11 @@ module.exports = function(sequelize, DataTypes) {
       eventId = url.split("=")[1];
       getEventData(eventId, "event");
     }
-    Otherwise if we have an category id in our url, preset the category select box to be our category
+    // Otherwise if we have an category id in our url, preset the category select box to be our category
     else if (url.indexOf("?category_id=") !== -1) {
-      categoryId = url.split("=")[1];
+      category_id = url.split("=")[1];
     }
 
-    // ****** not sure what to do with above or below ********
-  
     // Getting the categories, and their event
     getCategories();
   
@@ -58,7 +52,8 @@ module.exports = function(sequelize, DataTypes) {
         participants: participantsInput
           .val()
           .trim(),
-        CategoryId: categorySelect.val()
+        categoryId: categorySelect.val()
+        // maybe make lowercase
       };
   
       // If we're updating an event run updateEvent to update a event
@@ -75,9 +70,11 @@ module.exports = function(sequelize, DataTypes) {
     // Submits a new event and brings user to main event page upon completion
     function submitEvent(post) {
       $.post("/api/events", post, function() {
-        window.location.href = "/blog";
+        window.location.href = "/events";
       });
     }
+
+    // fix blog
 
     // ********* not sure if this is right. It was "/api/posts" before**************************************************************
   
@@ -95,13 +92,13 @@ module.exports = function(sequelize, DataTypes) {
       
       $.get(queryUrl, function(data) {
         if (data) {
-          console.log(data.CategoryId || data.id);
+          console.log(data.category_id || data.id);
           // If this category exists, prefill our cms forms with its data
           eventNameInput.val(data.eventName);
           locationInput.val(data.body);
           detailsInput.val(data.body);
           participantsInput.val(data.body);
-          authorId = data.AuthorId || data.id;
+          category_id = data.category_id || data.id;
           // If we have a post with this id, set a flag for us to know to update the post
           // when we hit submit
           updating = true;
@@ -109,46 +106,46 @@ module.exports = function(sequelize, DataTypes) {
       });
     }
   
-    // // A function to get Authors and then render our list of Authors
-    // function getCategories() {
-    //   $.get("/api/categories", renderCategoryList);
-    // }
-    // // Function to either render a list of authors, or if there are none, direct the user to the page
-    // // to create an author first
-    // function renderCategoryList(data) {
-    //   if (!data.length) {
-    //     window.location.href = "/authors";
-    //   }
-    //   $(".hidden").removeClass("hidden");
-    //   var rowsToAdd = [];
-    //   for (var i = 0; i < data.length; i++) {
-    //     rowsToAdd.push(createAuthorRow(data[i]));
-    //   }
-    //   authorSelect.empty();
-    //   console.log(rowsToAdd);
-    //   console.log(authorSelect);
-    //   authorSelect.append(rowsToAdd);
-    //   authorSelect.val(authorId);
-    // }
+    // A function to get Authors and then render our list of Authors
+    function getCategories() {
+      $.get("/api/categories", renderCategoryList);
+    }
+    // Function to either render a list of authors, or if there are none, direct the user to the page
+    // to create an author first
+    function renderCategoryList(data) {
+      if (!data.length) {
+        window.location.href = "/categories";
+      }
+      $(".hidden").removeClass("hidden");
+      var rowsToAdd = [];
+      for (var i = 0; i < data.length; i++) {
+        rowsToAdd.push(createAuthorRow(data[i]));
+      }
+      categorySelect.empty();
+      console.log(rowsToAdd);
+      console.log(categorySelect);
+      categorySelect.append(rowsToAdd);
+      categorySelect.val(category_id);
+    }
   
-    // // Creates the author options in the dropdown
-    // function createAuthorRow(author) {
-    //   var listOption = $("<option>");
-    //   listOption.attr("value", author.id);
-    //   listOption.text(author.name);
-    //   return listOption;
-    // }
+    // Creates the author options in the dropdown
+    function createAuthorRow(category) {
+      var listOption = $("<option>");
+      listOption.attr("value", category.id);
+      listOption.text(category.name);
+      return listOption;
+    }
   
-    // // Update a given post, bring user to the blog page when done
-    // function updatePost(post) {
-    //   $.ajax({
-    //     method: "PUT",
-    //     url: "/api/posts",
-    //     data: post
-    //   })
-    //     .then(function() {
-    //       window.location.href = "/blog";
-    //     });
-    // }
+    // Update a given post, bring user to the blog page when done
+    function updateEvent(post) {
+      $.ajax({
+        method: "PUT",
+        url: "/api/posts",
+        data: post
+      })
+        .then(function() {
+          window.location.href = "/blog";
+        });
+    }
   });
   
