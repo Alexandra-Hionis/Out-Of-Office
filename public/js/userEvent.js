@@ -142,7 +142,6 @@
   function handleEventUpdate() {
     
     var currentEvent = $(this)
-      
       .parent()
       .data("id");
     updateEvent(currentEvent.id);
