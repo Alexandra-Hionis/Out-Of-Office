@@ -79,6 +79,7 @@ db.Event.findOne({
   },
 })
 .then(function (dbEvent) {
+  console.log(dbEvent);
   res.json(dbEvent);
 });
 });
@@ -117,7 +118,12 @@ app.delete("/api/events/:id", function(req,res){
 // Update an event
 
 app.put("/api/events", function(req,res){
-  db.Event.update(req.details,
+console.log(req.body);
+  db.Event.findAll({ where: {id:req.body.id}}).then(function (data) {
+    console.log(data)
+    res.render("event-feed", { events: data })
+  })
+ /*  db.Event.update(req.details,
     {
       where: {
         id:req.details.id
@@ -125,6 +131,6 @@ app.put("/api/events", function(req,res){
     })
     .then(function(dbEvent){
       res.json(dbEvent)
-    });
+    }); */
 });
 };
