@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Out of Office</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/941444bb10.js" crossorigin="anonymous"></script>
+  <link href="stylesheets/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <h1>Create an Event</h1>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Fluid jumbotron</h1>
+            <form id="createEvent">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="input-event-name">Event Name</label>
+                        <input type="input-event-name" class="form-control" id="event-name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="input-location">Location</label>
+                        <input type="input-location" class="form-control" id="location">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="details">Details</label>
+                    <input type="details" class="form-control" id="details" placeholder="Your Event Details">
+                </div>
+                <div class="form-group">
+                    <label for="details">Who's Coming</label>
+                    <input type="participants" class="form-control" id="participants">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputCategory">Event Category</label>
+                    <select id="inputCategory" class="form-control">
+                        <option selected>Choose Event Category...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Event</button>
+        </form>
+    </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/login.js"></script>
+  <script type="text/javascript" src="js/eventFeed.js"></script>
+  <script type="text/javascript" src="js/userEvent.js"></script>
+
+
+</body>
+
+</html>

@@ -144,26 +144,44 @@
     var currentEvent = $(this)
       .parent()
       .data("id");
-    updateEvent(currentEvent.id);
+    updateEvent(currentEvent);
     console.log(currentEvent)
   }
 
 // redirect
 
     // Update a given post, bring user to the blog page when done
-    function updateEvent(post) {
-      $.ajax({
+    function updateEvent(id) {
+
+      window.location.href = "/events/" + id;
+
+    /*   $.get("/events/" + id, function(data) {
+        if (data) {
+          // If this post exists, prefill our cms forms with its data
+          eventNameInput.val(data.eventName);
+          locationInput.val(data.location);
+          detailsInput.val(data.details);
+          participantsInput.val(data.participants);
+          // If we have a post with this id, set a flag for us to know to update the post
+          // when we hit submit
+          updating = true;
+        }
+      });
+ */
+     /*  $.ajax({
         method: "PUT",
         url: "/api/events",
         data: post
       })
         .then(function() {
           window.location.href = "/events";
-        });
+        }); */
     }
 
      // This function does an API call to delete events
   function deleteEvent(id) {
+
+    
     $.ajax({
       method: "DELETE",
       url: "/api/events/" + id

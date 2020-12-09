@@ -14,10 +14,17 @@ module.exports = function (app) {
     })
   })
 
-  // create event html
-  app.get("/create-event.html", function (req,res) {
-    res.sendFile(path.join(__dirname,"../views/create-event.html"))
-  });
+  app.get("/events/:id", function (req, res) {
+    db.Event.findAll({where: {
+      id: req.params.id,
+    },
+  }).then(function (data) {
+      console.log(data)
+      res.render("update-event", { events: data })
+    })
+  })
+
+
 
 
 
@@ -45,10 +52,4 @@ module.exports = function (app) {
 
 }
 
-// to the event feed
-/* app.get ("/event", isAuthenticated, function (req,res){
-  res.render("event-feed",) // need an object to pass through here after the comma
-});
-
-// eventually render handlebars files. */
 
