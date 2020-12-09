@@ -7,6 +7,8 @@
     var participantsInput = $("#participants");
     var createEventForm = $("#createEvent");
     var categorySelect = $("#inputCategory");
+
+    $(document).on("click", "button.delete", handleEventDelete);
     
     // Adding an event listener for when the form is submitted
     $(createEventForm).on("submit", handleFormSubmit);
@@ -68,15 +70,11 @@
     }
   
     // Submits a new event and brings user to main event page upon completion
-    function submitEvent(post) {
-      $.post("/api/events", post, function() {
+    function submitEvent(event) {
+      $.post("/api/events", event, function() {
         window.location.href = "/events";
       });
     }
-
-    // fix blog
-
-    // ********* not sure if this is right. It was "/api/posts" before**************************************************************
   
     // Gets event data for the current event if we're editing, or if we're adding to an author's existing events
     function getEventData(id, type) {
@@ -106,7 +104,9 @@
       });
     }
   
-    // A function to get Authors and then render our list of Authors
+    // May not need
+
+    // A function to get categories and then render our list of Authors
     function getCategories() {
       $.get("/api/categories", renderCategoryList);
     }
@@ -119,7 +119,7 @@
       $(".hidden").removeClass("hidden");
       var rowsToAdd = [];
       for (var i = 0; i < data.length; i++) {
-        rowsToAdd.push(createAuthorRow(data[i]));
+        rowsToAdd.push(createCategoryRow(data[i]));
       }
       categorySelect.empty();
       console.log(rowsToAdd);
@@ -128,8 +128,8 @@
       categorySelect.val(category_id);
     }
   
-    // Creates the author options in the dropdown
-    function createAuthorRow(category) {
+    // Creates the category options in the dropdown
+    function createCategoryRow(category) {
       var listOption = $("<option>");
       listOption.attr("value", category.id);
       listOption.text(category.name);
@@ -140,12 +140,36 @@
     function updateEvent(post) {
       $.ajax({
         method: "PUT",
-        url: "/api/posts",
+        url: "/api/events",
         data: post
       })
         .then(function() {
-          window.location.href = "/blog";
+          window.location.href = "/events";
         });
     }
+
+     // This function does an API call to delete events
+  function deleteEvent(id) {
+    $.ajax({
+      method: "DELETE",
+      url: "/api/events/" + id
+    })
+      .then(function() {
+        window.location.href = "/events";
+      });
+  }
+
+  // This function figures out which event we want to delete and then calls
+  // deletePost
+  function handleEventDelete() {
+    var currentEvent = $(this)
+      .parent()
+      .parent()
+      .data("event");
+    deleteEvent(currentEvent.id);
+  }
+  
   });
+
+
   
