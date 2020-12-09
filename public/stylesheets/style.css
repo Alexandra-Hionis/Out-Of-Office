@@ -3,6 +3,18 @@ form.login {
   margin-top: 50px;
 }
 
-#logo {
+nav {
+  font-size: 1.5em;
+}
 
+/* #logo {
+  width: 50px;
+} */
+
+
+.navbar-brand {
+  position: relative;
+  width: 50%;
+  left: 15px;
+  background-size: contain;
 }
