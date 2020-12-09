@@ -168,14 +168,23 @@
         }
       });
  */
-     /*  $.ajax({
+
+ // call it to front end
+   /*    $.ajax({
         method: "PUT",
         url: "/api/events",
         data: post
       })
         .then(function() {
           window.location.href = "/events";
-        }); */
+        });  */
+    }
+
+    $(document).on("click", ".updateButton", updateEventData);
+    function updateEventData (event){
+      event.preventDefault();
+      console.log("hi");
+      // have to to use jquery grab all the values they input. then create an object to send back to the put route.  close to lines above. make the post object in line 176. Send back the id with object.
     }
 
      // This function does an API call to delete events
