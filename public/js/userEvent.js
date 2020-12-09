@@ -9,6 +9,7 @@
     var categorySelect = $("#inputCategory");
 
     $(document).on("click", "button.delete", handleEventDelete);
+    $(document).on("click", "#updateButton", handleEventUpdate);
     
     // Adding an event listener for when the form is submitted
     $(createEventForm).on("submit", handleFormSubmit);
@@ -136,6 +137,19 @@
       return listOption;
     }
   
+     // This function figures out which event we want to delete and then calls
+  // deletePost
+  function handleEventUpdate() {
+    
+    var currentEvent = $(this)
+      .parent()
+      .data("id");
+    updateEvent(currentEvent.id);
+    console.log(currentEvent)
+  }
+
+// redirect
+
     // Update a given post, bring user to the blog page when done
     function updateEvent(post) {
       $.ajax({
