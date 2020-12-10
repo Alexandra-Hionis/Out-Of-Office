@@ -6,7 +6,7 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function (app) {
 
-// event feed
+  // event feed
   app.get("/events", function (req, res) {
     db.Event.findAll({}).then(function (data) {
       console.log(data)
@@ -14,15 +14,16 @@ module.exports = function (app) {
     })
   })
 
+  //can delete lines 19-21 bc they're already being hosted by express
   // create event html
-  app.get("/create-event.html", function (req,res) {
-    res.sendFile(path.join(__dirname,"../views/create-event.html"))
+  app.get("/create-event.html", function (req, res) {
+    res.sendFile(path.join(__dirname, "../views/create-event.html"))
   });
 
 
 
   app.get("/", function (req, res) {
-    // If the user already has an account send them to the members page
+    // If the user already has an account send them to the members page; this can be a little simpler by using res.redirect-- check back w Anthony about this
     if (req.user) {
       res.redirect("/members");
     }

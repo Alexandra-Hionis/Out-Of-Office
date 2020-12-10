@@ -18,6 +18,14 @@ body {
   background-size: contain;
 }
 
+.pageTitle {
+  text-align: center;
+}
+
+.jumbotron {
+  margin: 20px;
+}
+
 /* colors: 
 dark teal #128b96
 light teal #adf8ff
