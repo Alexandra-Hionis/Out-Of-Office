@@ -1,5 +1,7 @@
 <h1>Create an Event</h1>
 
+{{#each events}}
+{{#dataValues}}
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="display-4">Fluid jumbotron</h1>
@@ -7,7 +9,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="input-event-name">Event Name</label>
-                    <input type="input-event-name" class="form-control" id="event-name">
+                    <input type="input-event-name" class="form-control" id="event-name" value= {{this.eventName}} >
                 </div>
                 <div class="form-group col-md-6">
                     <label for="input-location">Location</label>
@@ -16,7 +18,7 @@
             </div>
             <div class="form-group">
                 <label for="details">Details</label>
-                <input type="details" class="form-control" id="details" placeholder="Your Event Details">
+                <input type="details" class="form-control" id="details" value= {{this.details}}>
             </div>
             <div class="form-group">
                 <label for="details">Who's Coming</label>
@@ -30,7 +32,10 @@
                 </select>
             </div>
     </div>
-    <button type="submit" class="btn btn-primary">Create Event</button>
+    <button type="submit" class="btn btn-primary updateButton">Update Event</button>
     </form>
 </div>
 </div>
+
+{{/dataValues}}
+{{/each}}

@@ -47,77 +47,84 @@ module.exports = function (app) {
     }
   });
 
+  // see all events
 
-// see all events
-
-app.get("api/events", function (req, res) {
-  db.Event.findAll({}).then(function (dbEvent) {
-    res.json(dbEvent);
+  app.get("api/events", function (req, res) {
+    db.Event.findAll({}).then(function (dbEvent) {
+      res.json(dbEvent);
+    });
   });
-});
 
-// Route for returning events by category
+  // Route for returning events by category
 
-app.get("api/events/category/:category", function (req,res){
-  db.Event.findAll({
-    where:{
-      category:params.category
-    }
-  })
-  .then(function(dbEvent){
-    res.json(dbEvent);
-  })
-})
-
-
-// get route for one event
-
-app.get("/api/events/:id", function (req,res){;
-db.Event.findOne({
-  where: {
-    id: req.params.id,
-  },
-})
-.then(function (dbEvent) {
-  res.json(dbEvent);
-});
-});
-
-// Create new event
-
-app.post("/api/events", function (req,res){
-  console.log(req.body);
-  db.Event.create({
-    eventName: req.body.eventName,
-    location: req.body.location,
-    details: req.body.details,
-    category: req.body.category
-  })
-  .then(function(dbEvent){
-    res.json(dbEvent);
-  })
-})
-
-// Do we neeed a get route for all the users?
-
-
-// Delete an event
-
-app.delete("/api/events/:id", function(req,res){
-  db.Event.destroy({
-    where: {
-      id: req.params.id
-    }
-  })
-  .then(function(dbEvent){
-    res.json(dbEvent);
+  app.get("api/events/category/:category", function (req, res) {
+    db.Event.findAll({
+      where: {
+        category: params.category,
+      },
+    }).then(function (dbEvent) {
+      res.json(dbEvent);
+    });
   });
-});
 
-// Update an event
+  // get route for one event
 
-app.put("/api/events", function(req,res){
-  db.Event.update(req.details,
+  app.get("/api/events/:id", function (req, res) {
+    db.Event.findOne({
+      where: {
+        id: req.params.id,
+      },
+    }).then(function (dbEvent) {
+      console.log(dbEvent);
+      res.json(dbEvent);
+    });
+  });
+
+  // Create new event
+
+  app.post("/api/events", function (req, res) {
+    console.log(req.body);
+    db.Event.create({
+      eventName: req.body.eventName,
+      location: req.body.location,
+      details: req.body.details,
+      category: req.body.category,
+    }).then(function (dbEvent) {
+      res.json(dbEvent);
+    });
+  });
+
+  // Do we neeed a get route for all the users?
+
+  // Delete an event
+
+  app.delete("/api/events/:id", function (req, res) {
+    db.Event.destroy({
+      where: {
+        id: req.params.id,
+      },
+    }).then(function (dbEvent) {
+      res.json(dbEvent);
+    });
+  });
+
+  // Update an event
+
+  app.put("/api/events", function (req, res) {
+    console.log(req.body);
+    db.Event.update(
+      {
+        eventName: req.body.eventName,
+        location: req.body.location,
+        details: req.body.details,
+        category: req.body.category,
+      },
+      { where: { id: req.body.id } }
+    ).then(function (data) {
+      console.log(data);
+      res.render("event-feed", { events: data });
+    });
+    /*  db.Event.update(req.details,
     {
       where: {
         id:req.details.id
@@ -125,6 +132,6 @@ app.put("/api/events", function(req,res){
     })
     .then(function(dbEvent){
       res.json(dbEvent)
-    });
-});
+    }); */
+  });
 };

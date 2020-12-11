@@ -20,7 +20,15 @@ module.exports = function (app) {
     res.sendFile(path.join(__dirname, "../views/create-event.html"))
   });
 
-
+  app.get("/events/:id", function (req, res) {
+    db.Event.findAll({where: {
+      id: req.params.id,
+    },
+  }).then(function (data) {
+      console.log(data)
+      res.render("update-event", { events: data })
+    })
+  })
 
   app.get("/", function (req, res) {
     // If the user already has an account send them to the members page; this can be a little simpler by using res.redirect-- check back w Anthony about this
@@ -46,10 +54,4 @@ module.exports = function (app) {
 
 }
 
-// to the event feed
-/* app.get ("/event", isAuthenticated, function (req,res){
-  res.render("event-feed",) // need an object to pass through here after the comma
-});
-
-// eventually render handlebars files. */
 
