@@ -184,6 +184,40 @@
     function updateEventData (event){
       event.preventDefault();
       console.log("hi");
+     /*  if (!eventNameInput.val().trim() || !locationInput.val().trim() || !detailsInput.val().trim() || !participantsInput.val().trim() || !categorySelect.val()) {
+        return;
+      } */
+      var updatedEvent = {
+        id: parseInt($("#createEvent").data("value")),
+        eventName: eventNameInput
+          .val()
+          .trim(),
+        location: locationInput
+          .val()
+          .trim(),
+        details: detailsInput
+          .val()
+          .trim(),
+       /*  participants: participantsInput
+          .val()
+          .trim(), */
+        categoryId: categorySelect.val()
+        // maybe make lowercase
+      };
+  
+     /*  if (updating) {
+        updatedEvent.id = eventId;
+        updateEvent(updatedEvent);
+      } */
+    
+      $.ajax({
+        method: "PUT",
+        url: "/api/events",
+        data: updatedEvent
+      })
+        .then(function() {
+          window.location.href = "/events";
+        });
       // have to to use jquery grab all the values they input. then create an object to send back to the put route.  close to lines above. make the post object in line 176. Send back the id with object.
     }
 
