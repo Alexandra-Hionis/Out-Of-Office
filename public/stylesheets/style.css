@@ -9,6 +9,7 @@ nav {
 
 body {
   background-color: #29becc;
+  font-family: 'Fira Sans', sans-serif;
 }
 
 .navbar-brand {
@@ -24,6 +25,30 @@ body {
 
 .jumbotron {
   margin: 20px;
+  font-size: 1.5em;
+  padding: 1rem;
+  border-radius: 20px;
+  border: 3px solid white
+
+}
+
+.jumboPassport {
+  font-size: 1.2em;
+}
+
+.logSign {
+  font-size: .75em;
+}
+
+.btn {
+  background-color: #128b96;
+  font-size: .8em;
+  border-radius: 10px;
+}
+
+.btn:hover {
+  background-color: #29becc;
+  border-color: white
 }
 
 /* colors: 
