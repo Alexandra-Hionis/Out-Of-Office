@@ -134,13 +134,14 @@ module.exports = function (app) {
       res.json(dbEvent)
     }); */
   });
+  app.post("/api/userEvents", function (req, res) {
+    db.userEvent.create({
+      EventId: req.event.id,
+      UserId: req.users.id
+    }).then(function (dbUserEvent) {
+      res.json(dbUserEvent);
+    });
+  });
 };
 
-app.post("/api/userEvents", function (req, res) {
-  db.userEvent.create({
-    EventId: req.event.id,
-    UserId: req.users.id
-  }).then(function(dbUserEvent){
-    res.json(dbUserEvent);
-  });
-});
+
