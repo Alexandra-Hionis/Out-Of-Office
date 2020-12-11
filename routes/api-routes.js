@@ -135,3 +135,12 @@ module.exports = function (app) {
     }); */
   });
 };
+
+app.post("/api/userEvents", function (req, res) {
+  db.userEvent.create({
+    EventId: req.event.id,
+    UserId: req.users.id
+  }).then(function(dbUserEvent){
+    res.json(dbUserEvent);
+  });
+});
