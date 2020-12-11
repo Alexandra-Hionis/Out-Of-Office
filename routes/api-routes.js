@@ -90,7 +90,13 @@ module.exports = function (app) {
       details: req.body.details,
       category: req.body.category,
     }).then(function (dbEvent) {
-      res.json(dbEvent);
+      console.log(dbEvent);
+      db.UserEvents.create({
+        UserId: req.user.id,
+        EventId: dbEvent.dataValues.id,
+      }).then(function (newUserEvent) {
+        res.json(newUserEvent);
+      });
     });
   });
 
