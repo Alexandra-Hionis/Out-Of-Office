@@ -7,10 +7,9 @@ nav {
   font-size: 1.5em;
 }
 
-/* #logo {
-  width: 50px;
-} */
-
+body {
+  background-color: #29becc;
+}
 
 .navbar-brand {
   position: relative;
@@ -18,3 +17,17 @@ nav {
   left: 15px;
   background-size: contain;
 }
+
+.pageTitle {
+  text-align: center;
+}
+
+.jumbotron {
+  margin: 20px;
+}
+
+/* colors: 
+dark teal #128b96
+light teal #adf8ff
+
+*/
