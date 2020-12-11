@@ -90,7 +90,13 @@ module.exports = function (app) {
       details: req.body.details,
       category: req.body.category,
     }).then(function (dbEvent) {
-      res.json(dbEvent);
+      console.log(dbEvent);
+      db.UserEvents.create({
+        UserId: req.user.id,
+        EventId: dbEvent.dataValues.id,
+      }).then(function (newUserEvent) {
+        res.json(newUserEvent);
+      });
     });
   });
 
@@ -136,11 +142,13 @@ module.exports = function (app) {
   });
 };
 
-app.post("/api/userEvents", function (req, res) {
-  db.userEvent.create({
-    EventId: req.event.id,
+/* app.post("/api/userEvents", function (req, res) {
+  db.userEvent.findAll({
+    include: [{db.users,db.events}]
+    EventId: req.events.id,
     UserId: req.users.id
   }).then(function(dbUserEvent){
     res.json(dbUserEvent);
   });
-});
+}); 
+ */
