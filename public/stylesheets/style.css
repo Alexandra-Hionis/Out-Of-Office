@@ -51,6 +51,38 @@ body {
   border-color: white
 }
 
+.btn:after {
+  background-color: #128b96;
+  font-size: .8em;
+  border-radius: 10px;
+}
+
+.btn:active {
+  background-color: #128b96;
+  font-size: .8em;
+  border-radius: 10px;
+}
+
+.btn:active:after {
+  background-color: #128b96;
+  font-size: .8em;
+  border-radius: 10px;
+}
+
+.whatsToday {
+  text-align: center;
+  font-size: 40px;
+  background-color: white;
+  border: 5px solid white
+}
+
+.welcome {
+  text-align: center;
+  font-size: 40px;
+  background-color: white;
+  border: 5px solid white
+}
+
 /* colors: 
 dark teal #128b96
 light teal #adf8ff
