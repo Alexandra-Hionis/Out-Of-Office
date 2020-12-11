@@ -11,8 +11,9 @@
   <div class="card-body" data-id={{id}}>
     <h5 class="card-title">{{location}}</h5>
     <p class="card-text">{{details}}</p>
-    <a href="#" class="btn btn-primary">Join Event</a>
-    <a href="#" id="updateButton" class="btn btn-primary">Update Event</a>
+    <button type="button" class="btn btn-primary joinButton">Join Event</button>
+    <button type="button" class="btn btn-primary updateButton">Update Event</button>
+    <button type="submit" class="btn btn-primary deleteButton">Delete Event</button>
     {{!-- if the values are true, we'll add an icon; we'll have to create this in HTML routes, when we read in the data from the database, we'll have to read these extra fields BUT we might want to deal w the update first-- would read the values that already exist, we'd update, then save-- a get and then a put request-- USE THE BLOG FOR THIS --}}
   </div>
   <div class="card-footer text-muted">

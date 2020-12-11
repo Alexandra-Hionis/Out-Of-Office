@@ -8,8 +8,9 @@ $(document).ready(function () {
   var createEventForm = $("#createEvent");
   var categorySelect = $("#inputCategory");
 
-  $(document).on("click", "button.delete", handleEventDelete);
-  $(document).on("click", "#updateButton", handleEventUpdate);
+  $(document).on("click", ".deleteButton", handleEventDelete);
+  $(document).on("click", ".updateButton", handleEventUpdate);
+  $(document).on("click", ".joinButton", handleEventJoin);
 
   // Adding an event listener for when the form is submitted
   $(createEventForm).on("submit", handleFormSubmit);
@@ -32,7 +33,7 @@ $(document).ready(function () {
   }
 
   // Getting the categories, and their event
-  getCategories();
+  // getCategories();
 
   // A function for handling what happens when the form to create a new event is submitted
   function handleFormSubmit(event) {
@@ -177,7 +178,7 @@ $(document).ready(function () {
          });  */
   }
 
-  $(document).on("click", ".updateButton", updateEventData);
+  $(document).on("click", ".updateEvent", updateEventData);
   function updateEventData(event) {
     event.preventDefault();
     console.log("hi");
@@ -236,10 +237,31 @@ $(document).ready(function () {
   function handleEventDelete() {
     var currentEvent = $(this)
       .parent()
-      .parent()
-      .data("event");
+      .data();
+      console.log(currentEvent)
     deleteEvent(currentEvent.id);
   }
+
+  function handleEventJoin() {
+    var currentEvent = $(this)
+      .parent()
+      .data();
+      console.log(currentEvent)
+    joinEvent(currentEvent.id);
+  }
+
+  function joinEvent(id) {
+
+// api routes dan
+    $.ajax({
+      method: "PUT",
+      url: "/api/events/join/" + id
+    })
+      .then(function () {
+        window.location.href = "/events";
+      });
+  }
+
 
 });
 

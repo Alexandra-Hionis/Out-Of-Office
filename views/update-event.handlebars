@@ -14,29 +14,36 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="input-location">Location</label>
-                    <input type="input-location" class="form-control" id="location">
+                    <input type="input-location" class="form-control" id="location" value= {{this.location}}>
                 </div>
             </div>
             <div class="form-group">
                 <label for="details">Details</label>
                 <input type="details" class="form-control" id="details" value= {{this.details}}>
             </div>
-            <div class="form-group">
+            {{!-- <div class="form-group">
                 <label for="details">Who's Coming</label>
                 <input type="participants" class="form-control" id="participants">
-            </div>
+            </div> --}}
             <div class="form-group col-md-4">
                 <label for="inputCategory">Event Category</label>
-                <select id="inputCategory" class="form-control">
-                    <option selected>Choose Event Category...</option>
-                    <option>...</option>
+                <select id="inputCategory" class="form-control" 
+                {{!-- data-category={{this.category}} --}}
+                >
+                    <option id="choose">Choose Event Category...</option>
+                    <option id="1">1</option>
+                    <option id="2">2</option>
+                    <option selected id="3">3</option>
+                    <option id="4">4</option>
                 </select>
             </div>
     </div>
-    <button type="submit" class="btn btn-primary updateButton">Update Event</button>
+    <button type="submit" class="btn btn-primary updateEvent">Update Event</button>
     </form>
 </div>
 </div>
 
 {{/dataValues}}
 {{/each}}
+{{!-- $("#3").removeAttr("selected") --}}
+{{!-- $("#2").attr("selected", "selected") --}}
